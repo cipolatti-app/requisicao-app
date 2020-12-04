@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card" id="employee">
+      <nb-card-header>
+
+        <!-- <nb-actions size="medium" fullWidth>
+          <nb-action>
+            <nb-icon class="action-icon" icon="backspace-outline"></nb-icon>
+            <span>Pause</span>
+          </nb-action>
+
+        </nb-actions> -->
+
+        <nb-icon class="action-icon" icon="backspace-outline" (click)="toggleView()"></nb-icon>
+        Requisição: {{requisicao.num_requisicao}}
+
+        <div class="float-right">
+          <dx-button icon="plus" (onClick)="plusClick()"></dx-button>
+      </div>
+
+      </nb-card-header>
+      <nb-card-body>
+        <form class="form-inline">
+
+          <dx-data-grid id="gridContainer"
+            [dataSource]="produtos"
+            [allowColumnResizing]="true"
+            [columnAutoWidth]="true"
+            [columnMinWidth]="80"
+            [showColumnLines]="true"
+            [showRowLines]="true"
+            [showBorders]="true">
+
+            <dxo-filter-row
+              [visible]="showFilterRow"
+              [applyFilter]="currentFilter">
+            </dxo-filter-row>
+
+            <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+
+            <dxi-column [width]="80" alignment="center" dataField="cod_det_req" ></dxi-column>
+            <dxi-column [width]="90" alignment="center" dataField="codcompladicional" ></dxi-column>
+            <dxi-column dataField="planilha" ></dxi-column>
+            <dxi-column dataField="produto" ></dxi-column>
+            <dxi-column [width]="80" alignment="center" dataField="unidade" ></dxi-column>
+            <dxi-column [width]="90" alignment="center" dataField="quantidade" ></dxi-column>
+            <dxi-column [width]="90" alignment="center" dataField="coduniadicional" [visible]="false"></dxi-column>
+            <dxi-column [width]="90" alignment="center" dataField="codigo" [visible]="false"></dxi-column>
+
+            <dxi-column type="buttons" [width]="80">
+              <dxi-button
+                icon="edit"
+                [onClick]="cloneIconClick">
+              </dxi-button>
+          </dxi-column>
+
+          </dx-data-grid>
+        </form>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton (click)="atualizar()">Baixa na requisição</button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
+
+<dx-load-panel
+    #loadPanel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '#employee' }"
+    [(visible)]="loadingVisible"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    [closeOnOutsideClick]="false">
+</dx-load-panel>

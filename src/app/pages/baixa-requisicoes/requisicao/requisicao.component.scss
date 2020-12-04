@@ -1,0 +1,9 @@
+#gridContainer {
+  height: 65vh;
+}
+
+::ng-deep .right-side {
+  position: absolute;
+  right: 30px;
+  top: 6px;
+}

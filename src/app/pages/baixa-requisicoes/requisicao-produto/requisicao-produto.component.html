@@ -1,0 +1,125 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>
+        <nb-icon class="action-icon" icon="backspace-outline" (click)="toggleView()"></nb-icon>
+        {{rotulo}}
+      </nb-card-header>
+      <nb-card-body>
+
+
+          <div id="form-container">
+
+            <!-- <form (submit)="formSubmit()"> -->
+              <dx-form id="form"
+              [(formData)]="produto"
+              validationGroup="groupProduto"
+              [colCount]="2">
+
+                <dxi-item [colSpan]="2" dataField="BuscaProduto" [label]="{text: '', visible: false}" [editorOptions]="{ placeholder: 'Procurar por código do produto', onValueChanged: codcompladicionalChanged }"></dxi-item>
+
+                <dxi-item #planilha id="planilha"
+                dataField="planilha"
+                editorType="dxSelectBox"
+                [label]="{text: '', visible: false}"
+                [editorOptions]="{
+                  items: planilhas,
+                  valueExpr: 'planilha',
+                  displayExpr: 'planilha',
+                  searchEnabled: true,
+                  placeholder: 'Seleciona a planilha',
+                  onFocusIn: planilhaEnterKey,
+                  onValueChanged: planilhaSelectionChanged
+                }">
+                  <dxi-validation-rule type="required" message="planilha é obrigatório"></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item #codigo id="codigo"
+                dataField="codigo"
+                editorType="dxSelectBox"
+                [label]="{text: '', visible: false}"
+                [editorOptions]="{
+                  items: descricoes,
+                  valueExpr: 'codigo',
+                  displayExpr: 'descricao',
+                  searchEnabled: true,
+                  placeholder: 'Seleciona a descrição',
+                  onFocusIn: descricaoEnterKey,
+                  onValueChanged: descricaoSelectionChanged
+                }">
+                  <dxi-validation-rule type="required" message="descrição é obrigatório"></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item #coduniadicional id="coduniadicional"
+                dataField="coduniadicional"
+                editorType="dxSelectBox"
+                [label]="{text: '', visible: false}"
+                [editorOptions]="{
+                  items: descricaoAdicionais,
+                  valueExpr: 'coduniadicional',
+                  displayExpr: 'descricao_adicional',
+                  searchEnabled: true,
+                  placeholder: 'Seleciona a descrição adicional',
+                  onFocusIn: descricaoAdicionalEnterKey,
+                  onValueChanged: descricaoAdicionalSelectionChanged
+                }">
+                  <dxi-validation-rule type="required" message="descrição adicional é obrigatório"></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item #codcompladicional id="codcompladicional"
+                dataField="codcompladicional"
+                editorType="dxSelectBox"
+                [label]="{text: '', visible: false}"
+                [editorOptions]="{
+                  items: complementoAdicionais,
+                  valueExpr: 'codcompladicional',
+                  displayExpr: 'complementoadicional',
+                  searchEnabled: true,
+                  placeholder: 'Seleciona o complemento adicional',
+                  onFocusIn: codcomplAdicionalEnterKey,
+                  onValueChanged: codcomplAdicionalSelectionChanged
+                }">
+                  <dxi-validation-rule type="required" message="complemeto adicional é obrigatório"></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item [colSpan]="1" dataField="quantidade" [label]="{text: '', visible: false}" [editorOptions]="{ placeholder: 'Informe a quantidade' }">
+                  <dxi-validation-rule type="required" message="quantidade é obrigatório"></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item
+                    itemType="button"
+                    horizontalAlignment="left"
+                    [buttonOptions]="buttonOptions">
+                </dxi-item>
+
+                <!-- <dxi-item>
+                  <dx-button text="submit" type="success" [useSubmitBehavior]="true"></dx-button>
+                </dxi-item> -->
+
+                <!-- <dxi-item dataField="Notes" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item> -->
+
+              </dx-form>
+          <!-- </form> -->
+        </div>
+
+
+      </nb-card-body>
+
+      <nb-card-footer id="employee">
+        <button nbButton (click)="atualizar()">Atualizar produtos</button>
+      </nb-card-footer>
+
+    </nb-card>
+  </div>
+</div>
+
+<dx-load-panel
+    #loadPanel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '#employee' }"
+    [(visible)]="loadingVisible"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    [closeOnOutsideClick]="false">
+</dx-load-panel>

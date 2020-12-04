@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>Requisições</nb-card-header>
+      <nb-card-body>
+        <form class="form-inline">
+          <dx-data-grid id="gridContainer"
+            [dataSource]="requisicoes"
+            [showColumnLines]="true"
+            [showRowLines]="true"
+            [showBorders]="true">
+
+            <dxo-filter-row
+              [visible]="showFilterRow"
+              [applyFilter]="currentFilter">
+            </dxo-filter-row>
+
+            <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+
+            <dxi-column alignment="center" dataField="num_os_servico" caption="NÚMERO DE SERVIÇO"></dxi-column>
+            <dxi-column alignment="center" dataField="num_requisicao" caption="NÚMERO DA REQUISIÇÃO"></dxi-column>
+            <dxi-column alignment="center" dataField="data" caption="DATA CRIAÇÃO" dataType="date"></dxi-column>
+            <dxi-column alignment="center" dataField="setor_caminho" caption="SETOR ATENDIMENTO"></dxi-column>
+
+            <dxi-column type="buttons" [width]="100">
+              <dxi-button
+                icon="tableproperties"
+                [onClick]="cloneIconClick">
+              </dxi-button>
+          </dxi-column>
+
+          </dx-data-grid>
+        </form>
+      </nb-card-body>
+
+      <nb-card-footer id="employee">
+        <button nbButton (click)="atualizar()">Buscar requisições</button>
+      </nb-card-footer>
+
+    </nb-card>
+  </div>
+</div>
+
+<dx-load-panel
+    #loadPanel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '#employee' }"
+    [(visible)]="loadingVisible"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    [closeOnOutsideClick]="false">
+</dx-load-panel>
