@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1607302388608,
+  "timestamp": 1607305376734,
   "index": "/requisicao-app/index.html",
   "assetGroups": [
     {
@@ -288,7 +288,22 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "mission-api",
+      "patterns": [
+        "https:\\/\\/192\\.168\\.15\\.149:8443\\/api"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/requisicao-app/10-es2015.6847267b170173068d98.js": "090f4a6934a57f96c492fb9a71e40d3307652238",
     "/requisicao-app/10-es5.6847267b170173068d98.js": "4ca8c44e471ddd774eeccc05e2606e0ebd4f3a01",
